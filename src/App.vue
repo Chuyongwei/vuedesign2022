@@ -1,13 +1,14 @@
 <template >
 <div id="navigation">
 
-  <el-container style="height: 500px; border: 1px solid #eee">
+  <el-container style="height: 600px; border: 1px solid #eee">
     <el-header>HEAD</el-header>
-    <el-container>
+    <el-container style="height: 100%; border: 1px solid #eee">
       <!-- <el-aside width="200px">Aside</el-aside> -->
       <w-aside></w-aside>
       <w-main></w-main>
     </el-container>
+    <el-footer>dsafa</el-footer>
   </el-container>
 </div>
 </template>

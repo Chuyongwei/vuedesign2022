@@ -1,7 +1,7 @@
 <template>
-    <el-container style="height:600px">
+    <el-container  style="height: 500px;">
       <!-- <elcontainer>dsaf</elcontainer> -->
-      <base-table ></base-table>
+      <base-table style="height: 500px;"></base-table>
       <!-- <v-main>dsfg</v-main> -->
       <el-footer>dasf</el-footer>
     </el-container>
