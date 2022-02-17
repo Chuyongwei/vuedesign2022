@@ -1,11 +1,19 @@
 import Vue from 'vue'
 import App from './App.vue'
+import ElementUI from 'element-ui';
+import "./style/theme/index.css"
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
 
 Vue.config.productionTip = false
-import echarts from 'echarts'
 
+// 导入echarts
+import echarts from 'echarts'
 Vue.prototype.$echarts = echarts
-console.log(echarts);
+Vue.use(ElementUI, { locale })
+
+// 导入Element ui
+Vue.use(ElementUI)
 
 new Vue({
   render: h => h(App),
