@@ -1,24 +1,16 @@
-# my-vue
+# Vue学习2022
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. 添加echart
 
-### Compiles and minifies for production
-```
-npm run build
-```
+2. 添加element
 
-### Lints and fixes files
-```
-npm run lint
-```
+3. 复习v-for和v-if
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+4. 使用了solt插件
+
+> 设计了后台网页系统模板pages/home
+
+![后台模板](./images/后台模板.png)
+
+== 之后整理文件 ==

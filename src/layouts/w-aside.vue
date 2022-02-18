@@ -8,27 +8,27 @@
         :index="item.index + ''"
       >
         <template slot="title"
-          ><i class="el-icon-message"></i>{{ item.name }}</template
+          ><i class="el-icon-message"></i>{{ item.title }}</template
         >
         <!-- 导航栏第二层 -->
         <el-menu-item-group v-for="label in item.children" :key="label.index">
           <!-- 分组 -->
-          <template v-if="label.name" slot="title">{{ label.name }}</template>
+          <template v-if="label.title" slot="title">{{ label.title }}</template>
           <!-- 导航栏第三层 -->
           <div v-for="l in label.items" :key="l.index" :index="l.index">
             <template v-if="l.children">
               <el-submenu :index="l.index">
-                <template slot="title">{{ l.name }}</template>
+                <template slot="title">{{ l.title }}</template>
                 <el-menu-item
                   v-for="l in l.children"
                   :key="l.index"
                   :index="l.index"
-                  >{{ l.name }}</el-menu-item
+                  >{{ l.title }}</el-menu-item
                 >
               </el-submenu>
             </template>
             <template v-else>
-              <el-menu-item :index="l.index">{{ l.name }}</el-menu-item>
+              <el-menu-item :index="l.index">{{ l.title }}</el-menu-item>
             </template>
           </div>
 
@@ -102,37 +102,37 @@ export default {
       items: [
         {
           index: 1,
-          name: "导航一",
+          title: "导航一",
           children: [
             {
               index: 1,
-              name: "分组一",
+              title: "分组一",
               items: [
                 {
                   index: "1-1",
-                  name: "选项1",
+                  title: "选项1",
                 },
                 {
                   index: "1-2",
-                  name: "选项2",
+                  title: "选项2",
                 },
               ],
             },
             {
               index: 2,
-              name: "分组二",
+              title: "分组二",
               items: [
                 {
                   index: "2-1",
-                  name: "选项3",
+                  title: "选项3",
                 },
                 {
                   index: "2-2",
-                  name: "选项4",
+                  title: "选项4",
                   children: [
                     {
                       index: "2-2-1",
-                      name: "选项4-1",
+                      title: "选项4-1",
                     },
                   ],
                 },
@@ -145,6 +145,15 @@ export default {
   },
 };
 </script>
-
+<style scoped>
+.sidebar {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 70px;
+    bottom: 0;
+    overflow-y: scroll;
+}
+</style>
 <style lang="scss" scoped>
 </style>

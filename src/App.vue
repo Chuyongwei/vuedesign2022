@@ -1,51 +1,27 @@
-<template >
-<div id="navigation">
+<template>
+<div id="app">
 
-  <el-container style="height: 600px; border: 1px solid #eee">
-    <el-header>HEAD</el-header>
-    <el-container style="height: 100%; border: 1px solid #eee">
-      <!-- <el-aside width="200px">Aside</el-aside> -->
-      <w-aside></w-aside>
-      <w-main></w-main>
-    </el-container>
-    <el-footer>dsafa</el-footer>
-  </el-container>
+<!-- <conte></conte> -->
+<home></home>
 </div>
 </template>
 
 <script>
-import WAside from "./layouts/w-aside.vue";
-import wMain from "./layouts/w-main.vue";
-
-export default {
-  components: { wMain, WAside },
-};
+import Home from './pages/Home.vue'
+import conte from './layouts/w-Conte.vue'
+  export default {
+  components: { conte, Home },
+    
+  }
 </script>
 
-<style >
-.el-header {
-  background-color: #b3c0d1;
-  color: #333;
-  line-height: 60px;
+<style scoped>
+#app{
+  background: blue;
+  
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0; */
 }
-
-.el-aside {
-  color: #333;
-}
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-  text-align: center;
-  line-height: 160px;
-}
-</style>
-<style  scoped>
-#navigation {
-  /* height: 80px; */
-  width: 100%;
-  background: yellow;
-}
-/* *{
-  margin: 0;
-} */
 </style>

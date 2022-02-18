@@ -1,9 +1,9 @@
 <template>
-    <el-container  style="height: 500px;">
+    <el-container class="v-content"  >
       <!-- <elcontainer>dsaf</elcontainer> -->
-      <base-table style="height: 500px;"></base-table>
+      <base-table style="height:92%" ></base-table>
       <!-- <v-main>dsfg</v-main> -->
-      <el-footer>dasf</el-footer>
+      <el-footer style="height:8%">@ <font color="red">魏少</font> 倾情制作</el-footer>
     </el-container>
 
 </template>
@@ -32,5 +32,12 @@ export default {
 }
 </style>
 <style  scoped>
-
+.v-content {
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 100%;
+    /* overflow-y: scroll; */
+}
 </style>
