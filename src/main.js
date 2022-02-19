@@ -9,6 +9,8 @@ Vue.config.productionTip = false
 
 // 导入echarts
 import echarts from 'echarts'
+
+import router from './router'
 Vue.prototype.$echarts = echarts
 Vue.use(ElementUI, { locale })
 
@@ -16,5 +18,6 @@ Vue.use(ElementUI, { locale })
 Vue.use(ElementUI)
 
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')
