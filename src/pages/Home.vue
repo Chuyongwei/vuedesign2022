@@ -2,7 +2,7 @@
   <!-- <div id="main-content"> -->
 
   <el-container id="main-content">
-    <el-header height="10%">HEAD</el-header>
+    <el-header height="10%">{{this.$store.state.msg}}dgf</el-header>
     <el-container id="main-content" style="height: 90%">
       <!-- <el-aside width="200px">Aside</el-aside> -->
       <w-aside></w-aside>
@@ -14,11 +14,14 @@
 </template>
 
 <script>
-import WAside from "../layouts/w-aside.vue";
-import wMain from "../layouts/w-main.vue";
+import WAside from "../layouts/W-aside";
+import wMain from "../layouts/W-main";
 
 export default {
   components: { wMain, WAside },
+  beforeMount(){
+    console.log(this.$store);
+  }
 };
 </script>
 

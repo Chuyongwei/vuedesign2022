@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Home from './pages/Home.vue'
-import conte from './layouts/w-Conte.vue'
+import Home from './pages/Home'
+import conte from './layouts/W-Conte'
   export default {
   components: { conte, Home },
     
