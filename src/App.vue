@@ -7,18 +7,18 @@
 </template>
 
 <script>
-import Home from './pages/Home'
+import Navication  from './pages/Navication.vue'
 import conte from './layouts/W-Conte'
   export default {
-  components: { conte, Home },
+  components: { conte, Navication },
     
   }
 </script>
 
 <style scoped>
 #app{
-  background: blue;
-  
+  background: pink;
+  height: 100%;
   /* position: absolute;
   top: 0;
   right: 0;

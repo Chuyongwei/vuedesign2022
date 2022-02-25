@@ -1,21 +1,49 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../pages/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'login',
     meta:{
       title:"工作"
     },
-    component: Home,
+    component: ()=>import("@/pages/Login.vue"),
     children:[
 
     ]
   },
+  {
+    path: "/home",
+    name:"home",
+    component:()=>import("@/pages/Home/Home.vue"),
+    redirect: "/home/doctor/",
+    children:[
+      {
+        path:"doctor",
+        name:"doctor",
+        component:()=>import("@/pages/Doctor/index.vue")
+      },
+      {
+        path:"medical",
+        name:"medical",
+        component:()=>import("@/pages/Medical/index.vue")
+      },
+      {
+        path:"score",
+        name:"score",
+        component:()=>import("@/pages/Score/index.vue")
+      },
+      {
+        path:"inform",
+        name: "inform",
+        component:()=>import("@/pages/Inform/index.vue")
+      }
+    ]
+  },
+
   {
     path: '/login',
     name: 'Login',

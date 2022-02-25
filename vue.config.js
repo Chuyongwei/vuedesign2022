@@ -4,12 +4,12 @@ module.exports = {
     assetsDir: 'static',
     productionSourceMap: false,
     devServer: {
-        host: "localhost",
+        host:"0.0.0.0",
         port: 3000,
         open: true,
         proxy: {
-            '/admin': {
-                target: 'http://localhost:8888/',
+            '/api': {
+                target: 'http://localhost:8085/',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/api': ''
