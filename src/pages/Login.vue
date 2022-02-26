@@ -30,7 +30,7 @@
       <el-col :offset="2" :span="5"><font size="4"> 确认密码：</font> </el-col>
       <el-col :span="16">
         <el-input
-          v-model="user.password"
+          v-model="user.repeatpassword"
           placeholder="请输入内容"
           @keyup.enter.native="handlogin"
           show-password
@@ -46,7 +46,7 @@
           @click="handlogin"
           >登录</el-button
         >
-        <el-button type="primary" v-else style="width: 100%" @click="handlogin"
+        <el-button type="primary" v-else style="width: 100%" @click="handleRegister"
           >注册</el-button
         >
         <el-button type="text" @click="login=!login">返回{{login?"注册页面":"登录页面"}}</el-button>
@@ -63,25 +63,55 @@ export default {
       user: {
         username: "",
         password: "",
+        repeatpassword:""
       },
       login: true,
       showpass: true,
     };
   },
+  watch:{
+    login(){
+      this.user.username=""
+      this.user.password=""
+      this.user.repeatpassword=""
+    }
+  },
   mounted() {
-    console.log(this.$store.state.user);
-    if (this.$store.state.user != null)
-      this.$router.push({ path: "/home/doctor" });
+    // console.log(this.$store.state.user);
+    // if (this.$store.state.user != null)
+    //   this.$router.push({ path: "/home/doctor" });
   },
   methods: {
     handlogin() {
-      console.log(JSON.stringify(this.user));
-      this.$axios.post("/user/login", this.user).then((e) => {
-        console.log(e);
-        this.$store.commit("loginin", e);
-        this.$router.push({ path: "home" || "/" }); // 跳转
+      this.$axios.post("/user/login", this.user).then((data) => {
+        // let {data} = e
+        console.log("login",data);
+        if(!data.username){
+          alert("登录失败");
+        }else{
+          this.$store.commit("loginin", data);
+          this.$router.push({ path: "home" || "/" }); // 跳转
+        }
       });
     },
+    handleRegister(){
+      if(this.user.password!==""&&this.user.password!==this.user.repeatpassword){
+        alert("输入密码不一致");
+        return
+      }
+      this.$axios.post("/user/register",this.user).then((data)=>{
+        // console.log(e);
+        // let {data} = e
+        if(data==false){
+          alert("用户已存在");
+        }else{
+          alert("注册成功")
+          this.login = true
+        }
+      }).catch((e)=>{
+        console.log(e);
+      })
+    }
     
   },
 };

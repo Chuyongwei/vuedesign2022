@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="head" style="text-align: center" >
-      <font size="6" @click="Tocomplete">{{ user }}用户界面</font
+      <font size="6" @click="Tocomplete">{{ user.username }}用户界面</font
       ><span style="float: right" @click="logout">退出</span>
     </div>
     <div id="content">
@@ -14,19 +14,31 @@
 <script>
 import Footer from "@/pages/Home/Footer";
 export default {
-  name: "home1",
+  name: "home",
   data() {
     return {
-      user: "",
+      user: {
+        uid:0,
+
+      },
     };
   },
   components: {
     Footer,
   },
   mounted() {
-    this.user = this.$store.state.user;
-    console.log(this.user);
-    if (this.$store.state.user == null) this.$router.push({ path: "/" });
+    this.user = this.$store.state.user
+    console.log("sdaf",this.user);
+    // this.user.uid = this.$store.state.uid;
+    // console.log("home的",this.$store.state.uid,this.user);
+    // if (this.user.uid===0) this.$router.push({ path: "/" });
+    // else {
+    //   console.log(this.user);
+    //   this.$axios.post("/user/checkUserBy",this.user).then(e=>{
+    //     this.user = e.data
+    //   this.$store.commit("getuser",this.user)
+    //   })
+    // }
   },
   methods: {
     logout() {
