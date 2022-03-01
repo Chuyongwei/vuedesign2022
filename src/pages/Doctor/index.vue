@@ -4,14 +4,14 @@
       <div
         class="classify"
         v-for="l in classtify"
-        :key="l.index+''"
-        @click="findeclass(l.index)"
+        :key="l.departmentid+''"
+        @click="findeclass(l.departmentid)"
       >
-        <font size="6px">{{ l.name }}</font>
+        <font size="5px">{{ l.departmentname }}</font>
       </div>
     </div>
     <div class="items">
-      <div v-for="l in list" class="item" :key="l.index+''">
+      <div v-for="l in list" class="item" :key="l.doctorid+''">
         <div class="name">
           <font size="5">{{ l.name }}</font>
           <button class="edit" @click="subscribe(l.id)" type="info">预约</button>
@@ -33,27 +33,27 @@ export default {
   data() {
     return {
       list: [
+
       ],
       classtify: [
+                {
+          departmentid:0,
+          departmentname: "全部医生"
+        }
       ],
     };
   },
   // TODO 注入数据
   mounted() {
-    for (let i = 0; i < 20; i++) {
-      this.list.push({
-        index: i,
-        name: "张三",
-        department: "吃饭",
-        position: "老大",
-        introduce: "曾经是一个好吃懒做的人，后来发奋学习成为了一名大神",
-      });
-      
-      this.classtify.push({
-        index:i,
-        name:"呼吸科"
-      })
-    }
+    this.$axios.get("/doctor/findDeparment").then(e=>{
+      let data = e.filter(e1=>e1.departmentid==1)
+      this.classtify.push(...data)
+    })
+    
+    this.$axios.get("/doctor/check").then(e=>{
+      this.list = e
+    })
+
   },
   methods: {
     findeclass(e) {

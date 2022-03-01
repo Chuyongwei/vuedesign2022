@@ -71,10 +71,10 @@ router.beforeEach((to, from, next) => {
     let user = {uid: store.state.uid}
     axios.post("/user/checkUserBy",user).then(e=>{
       // this.user = e.data
-      console.log("内部",e);
+      console.log("守卫中获取的user",e);
     store.commit("getuser",e)
     })
-    console.log("ti",store.state.user);
+    // console.log("获取",store.state.user);
     // next({path:"/home"})
   }
   if (to.path == "/login") {

@@ -37,7 +37,8 @@ export default {
   methods: {
     redirectto(to){
       console.log(this.$route,to);
-      if(this.$route.Path!==to){
+      if(this.$route.fullPath!=to){
+        console.log("跳转了");
         this.$router.push(to)
       }
     }
