@@ -29,7 +29,7 @@ export default {
         {
           index: 3,
           redirect: "/home/score",
-          name: "预约记录",
+          name: "跟踪记录",
         },
       ],
     };

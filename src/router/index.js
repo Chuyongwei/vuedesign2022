@@ -64,43 +64,49 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log("守卫",to,from);
+  console.log("守卫", to, from);
   console.log("守卫中的sotre", store.state)
 
-  if (store.state.uid&&!store.state.username){
-    let user = {uid: store.state.uid}
-    axios.post("/user/checkUserBy",user).then(e=>{
+  if (store.state.uid && !store.state.username) {
+    let user = { uid: store.state.uid }
+    axios.post("/user/checkUserBy", user).then(e => {
       // this.user = e.data
-      console.log("守卫中获取的user",e);
-    store.commit("getuser",e)
+      console.log("守卫中获取的user", e);
+      store.commit("getuser", e)
+      store.dispatch("setPatient")
+      console.log("订阅");
+    }).then(()=>{
+      if(to.path == "/login"){
+        next({ path: "/home" })
+      }
     })
     // console.log("获取",store.state.user);
     // next({path:"/home"})
   }
   if (to.path == "/login") {
-    if (store.state.uid){
+    if (store.state.uid) {
       // let user = {uid: store.state.uid}
       // axios.post("/user/checkUserBy",user).then(e=>{
       //   // this.user = e.data
       // store.commit("getuser",e.data)
       // })
-      next({path:"/home"})
+      next({ path: "/home" })
     }
     else
-    next()
-      // this.$router.push({ path: "/home/doctor" });
+      next()
+    // this.$router.push({ path: "/home/doctor" });
   }
-      // this.user.uid = this.$store.state.uid;
-    // console.log("home的",this.$store.state.uid,this.user);
-    // if (this.user.uid===0) this.$router.push({ path: "/" });
-    // else {
-    //   console.log(this.user);
-    //   this.$axios.post("/user/checkUserBy",this.user).then(e=>{
-    //     this.user = e.data
-    //   this.$store.commit("getuser",this.user)
-    //   })
-    // }
-  
+  // this.user.uid = this.$store.state.uid;
+  // console.log("home的",this.$store.state.uid,this.user);
+  // if (this.user.uid===0) this.$router.push({ path: "/" });
+  // else {
+  //   console.log(this.user);
+  //   this.$axios.post("/user/checkUserBy",this.user).then(e=>{
+  //     this.user = e.data
+  //   this.$store.commit("getuser",this.user)
+  //   })
+  // }
+
   // if(to.path!=="/home/inform"){
   //   next({path:"/home/inform"})
   // }else

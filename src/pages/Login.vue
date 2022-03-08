@@ -84,7 +84,6 @@ export default {
   methods: {
     handlogin() {
       this.$axios.post("/user/login", this.user).then((data) => {
-        // let {data} = e
         console.log("login",data);
         if(!data.username){
           alert("登录失败");

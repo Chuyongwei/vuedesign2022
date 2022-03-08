@@ -50,7 +50,6 @@ export default {
     
     console.log("信息界面创建",this.$store.state.user);
     this.$axios.post("/user/findpatientbyname",this.$store.state.user).then((e)=>{
-      console.log("sdfa",e);
       if(e.length){
         this.form = e[0]
       }

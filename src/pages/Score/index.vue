@@ -6,8 +6,7 @@
       border
       style="width: 100%; background: red"
     >
-      <el-table-column prop="date" label="日期"> </el-table-column>
-      <el-table-column prop="departmentname" label="诊室"> </el-table-column>
+      <el-table-column prop="trackdate" label="预约日期"> </el-table-column>
       <el-table-column prop="name" label="医生"> </el-table-column>
       <el-table-column prop="status" label="状态" align="center">
         <template #default="scope">
@@ -19,10 +18,15 @@
                 ? 'danger'
                 : 'warning'
             "
-            >{{ scope.row.state }}</el-tag
+            >{{ scope.row.status }}</el-tag
           >
         </template>
       </el-table-column>
+      <el-table-column prop="conditions" label="情况">
+        <template #default="scope">
+          {{scope.row.conditions||"代办"}}
+        </template>
+         </el-table-column>
     </el-table>
   </div>
 </template>
@@ -33,35 +37,36 @@ export default {
   data() {
     return {
       scores: [
-        {
-          id: 0,
-          name: "张三",
-          department: "吃饭",
-          date: "2022-01-02",
-          state: "失败",
-        },
+        // {
+        //   id: 0,
+        //   name: "张三",
+        //   department: "吃饭",
+        //   date: "2022-01-02",
+        //   state: "失败",
+        // },
       ],
+      patient: {},
     };
   },
   mounted() {
-    this.$axios
-      .post("/user/findpatientbyname", this.$store.state.user)
-      .then((data) => {
-        console.log("预约时获取病人的数据", data);
-        if (data.length) {
-          let inform = data[0];
-          return inform;
-        } else {
-          alert("请创建个人信息");
-          this.$router.push("/home/inform");
-        }
-      }).then(data=>{
-        this.$axios.post("/user/checkmedical",data).then(data=>{
-          console.log("获取到的信息",data);
-          this.scores = data
-        })
-      })
-
+    let thisdoc = this
+    setTimeout(function () {
+      this.patient = thisdoc.$store.state.patient;
+      console.log("跟踪里的信息", thisdoc.patient);
+      if (!this.patient) {
+        alert("请创建个人信息");
+        thisdoc.$router.push("/home/inform");
+      }
+      thisdoc.getList();
+    },1000);
+  },
+  methods: {
+    getList() {
+      this.$axios.post("/user/checkTrack", this.patient).then((data) => {
+        console.log("获取到的信息", data);
+        this.scores = data;
+      });
+    },
   },
 };
 </script>
