@@ -7,7 +7,7 @@ Vue.use(Vuex)
  export default new Vuex.Store({
     state(){
         return {
-            user: {},
+            user: null,
             uid: getToken()-0,
             patient: null
         }
@@ -25,6 +25,7 @@ Vue.use(Vuex)
         logout(state){
             removeToken()
             state.user=null
+            state.uid = 0
         },
         SET_PATIENT(state,data){
             state.patient = data

@@ -32,17 +32,11 @@
 export default {
   name: "MedicalTable",
   mounted() {
-    // this.patient = this.$store.state.patient;
-    // if (!this.patient) {
-    //   alert("请创建个人信息");
-    //   this.$router.push("/home/inform");
-    // }
-    // this.getList();
     let thisdoc = this;
     setTimeout(function () {
-      this.patient = thisdoc.$store.state.patient;
+      thisdoc.patient = thisdoc.$store.state.patient;
       console.log("跟踪里的信息", thisdoc.patient);
-      if (!this.patient) {
+      if (!thisdoc.patient) {
         alert("请创建个人信息");
         thisdoc.$router.push("/home/inform");
       }
@@ -52,15 +46,6 @@ export default {
   data() {
     return {
       tableData: [
-        {
-          id: "12987122",
-          doctor: "张三",
-          date: "2017-02-00",
-          department: "心脏课",
-          statue: "心脏骤停",
-          other:
-            "多吃饭，房价肯定撒谎付款计划士大夫看见不断升级北京开会艰苦奋斗的韩国空军山东高考加分",
-        },
       ],
       patient: {},
     };

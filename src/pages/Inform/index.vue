@@ -62,6 +62,12 @@ export default {
       this.form.brithday = this.dateFormat(this.form.brithday)
       this.$axios.post("/user/addpatient",this.form).then(e=>{
         console.log(e);
+        if(e){
+          alert("创建成功")
+        }else{
+          alert("失败")
+        }
+        this.$store.dispatch("setPatient")
       })
     },
     dateFormat(dateData) {

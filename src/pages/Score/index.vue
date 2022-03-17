@@ -50,15 +50,16 @@ export default {
   },
   mounted() {
     let thisdoc = this
+    console.log("score",thisdoc.$store.state.patient);
     setTimeout(function () {
-      this.patient = thisdoc.$store.state.patient;
+      thisdoc.patient = thisdoc.$store.state.patient;
       console.log("跟踪里的信息", thisdoc.patient);
-      if (!this.patient) {
+      if (!thisdoc.patient) {
         alert("请创建个人信息");
         thisdoc.$router.push("/home/inform");
       }
       thisdoc.getList();
-    },1000);
+    },500);
   },
   methods: {
     getList() {

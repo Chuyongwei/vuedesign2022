@@ -1,6 +1,6 @@
 module.exports = {
     // baseUrl: './',
-    publicPath:process.env.NODE_ENV === "production"?"/film/":"/",
+    publicPath:process.env.NODE_ENV === "development"?"/":"/patient-user",
     assetsDir: 'static',
     productionSourceMap: false,
     devServer: {

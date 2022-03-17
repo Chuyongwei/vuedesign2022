@@ -43,7 +43,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("logout");
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/login" });
     },
     Tocomplete(){
       this.$router.push({ path: "/home/inform" });
