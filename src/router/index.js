@@ -64,6 +64,12 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   console.log("守卫", to, from);
   console.log("守卫中的sotre", store.state)
+  // if (pageTitle) {
+  //   // INFO 修改标题名
+  //   return `${pageTitle} - ${title}`
+  // }
+  // return `${title}`
+  document.title = "用户预约"
   const hasToken = getToken()
   if (hasToken) {
     console.log("有hasToken", hasToken);
