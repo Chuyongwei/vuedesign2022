@@ -13,6 +13,9 @@
     <div class="items">
       <div v-for="l in listclass" class="item" :key="l.doctorid + ''">
         <div class="name">
+          <div style="width:50px;height:50px;background:red;float:left">
+            <img src="/api/common/printImg/9" alt="" style="width:100%;height:100%">
+          </div>
           <font size="5">{{ l.name }}</font>
           <button class="edit" @click="subscribe(l.doctorid)" type="info">
             预约
