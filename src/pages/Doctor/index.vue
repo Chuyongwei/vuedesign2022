@@ -1,15 +1,22 @@
 <template>
   <div id="doctor">
     <div class="left">
+      <!-- 星期 -->
       <div class="classify" @click="showDaily = !showDaily">
         <font size="5px">{{ titles[date].value }}</font>
       </div>
       <div v-show="showDaily">
-        <div class="classify" style="background:#5f9c9d" @click="changeDaily(index)" v-for="(item, index) in titles" :key="index">
+        <div
+          class="classify"
+          style="background: #5f9c9d"
+          @click="changeDaily(index)"
+          v-for="(item, index) in titles"
+          :key="index"
+        >
           <font size="5px">{{ item.value }}</font>
         </div>
       </div>
-
+      <!-- 科室 -->
       <div
         class="classify"
         v-for="l in classtify"
@@ -19,6 +26,7 @@
         <font size="5px">{{ l.departmentname }}</font>
       </div>
     </div>
+    <!-- 医生 -->
     <div class="items">
       <div v-for="l in listclass" class="item" :key="l.doctorid + ''">
         <div class="name">
@@ -58,6 +66,7 @@ export default {
   data() {
     return {
       date: 0,
+      // 获取医生列表
       list: [],
       titles: [
         { value: "星期天" },
@@ -68,7 +77,9 @@ export default {
         { value: "星期五" },
         { value: "星期六" },
       ],
+      // 显示医生列表
       listclass: [],
+      // 科室列表
       classtify: [
         {
           departmentid: 0,
@@ -77,6 +88,10 @@ export default {
       ],
       showsubscribe: false,
       showDaily: false,
+      query: {
+        departmentid: null,
+        week: 0,
+      },
     };
   },
   // TODO 注入数据
@@ -95,16 +110,30 @@ export default {
   },
   methods: {
     findeclass(departmentid) {
-      if (departmentid !== 0)
+      /*       if (departmentid !== 0)
         this.listclass = this.list.filter((e) => {
           return e.departmentid == departmentid;
         });
-      else this.listclass = this.list;
+      else this.listclass = this.list; */
+      if (departmentid !== 0) {
+        this.query.departmentid = departmentid;
+      } else {
+        this.query.departmentid = null;
+      }
+      console.log(departmentid, this.query);
+      this.$axios.post("user/checkDoctorByWeek", this.query).then((e) => {
+        console.log("更新获取",e);
+        this.listclass = e
+      });
       // console.log(e);
     },
-    changeDaily(index){
+    changeDaily(index) {
       this.date = index;
-      this.showDaily= false
+      this.showDaily = false;
+      this.query.week = this.titles[index].value;
+      this.$axios.post("user/checkDoctorByWeek", this.query).then((e) => {
+        this.listclass = e
+      });
     },
     // TODO 编写预约
     subscribe(doctorid) {
