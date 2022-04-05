@@ -37,13 +37,6 @@ export default {
   data() {
     return {
       scores: [
-        // {
-        //   id: 0,
-        //   name: "张三",
-        //   department: "吃饭",
-        //   date: "2022-01-02",
-        //   state: "失败",
-        // },
       ],
       patient: {},
     };

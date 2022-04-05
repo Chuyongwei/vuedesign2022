@@ -52,13 +52,13 @@ export default {
   height: 7%;
   width: 100%;
   padding-top: 5px;
-  background: rgba(155, 126, 235, 0.219);
+  background: #4b9b7c;
   
 }
 .b-button {
   
   float: left;
-  background: blueviolet;
+  background: #2b8464;
   border-radius: 9px;
   margin-top: 5px;
   margin-left: 40px;

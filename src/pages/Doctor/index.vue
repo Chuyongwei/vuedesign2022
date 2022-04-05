@@ -1,6 +1,15 @@
 <template>
   <div id="doctor">
     <div class="left">
+      <div class="classify" @click="showDaily = !showDaily">
+        <font size="5px">{{ titles[date].value }}</font>
+      </div>
+      <div v-show="showDaily">
+        <div class="classify" style="background:#5f9c9d" @click="changeDaily(index)" v-for="(item, index) in titles" :key="index">
+          <font size="5px">{{ item.value }}</font>
+        </div>
+      </div>
+
       <div
         class="classify"
         v-for="l in classtify"
@@ -13,8 +22,12 @@
     <div class="items">
       <div v-for="l in listclass" class="item" :key="l.doctorid + ''">
         <div class="name">
-          <div style="width:50px;height:50px;background:red;float:left">
-            <img src="/api/common/printImg/9" alt="" style="width:100%;height:100%">
+          <div style="width: 50px; height: 50px; background: red; float: left">
+            <img
+              src="/api/common/printImg/9"
+              alt=""
+              style="width: 100%; height: 100%"
+            />
           </div>
           <font size="5">{{ l.name }}</font>
           <button class="edit" @click="subscribe(l.doctorid)" type="info">
@@ -44,7 +57,17 @@ export default {
   name: "doctor",
   data() {
     return {
+      date: 0,
       list: [],
+      titles: [
+        { value: "星期天" },
+        { value: "星期一" },
+        { value: "星期二" },
+        { value: "星期三" },
+        { value: "星期四" },
+        { value: "星期五" },
+        { value: "星期六" },
+      ],
       listclass: [],
       classtify: [
         {
@@ -52,30 +75,36 @@ export default {
           departmentname: "全部医生",
         },
       ],
-      showsubscribe:false
+      showsubscribe: false,
+      showDaily: false,
     };
   },
   // TODO 注入数据
   mounted() {
     this.$axios.get("/doctor/checkDeparment").then((e) => {
-      let data = e.filter((e1) => e1.departmentid == 1);
+      let data = e.filter((e1) => e1.departmentid != 2);
       this.classtify.push(...data);
     });
+    this.date = new Date().getDay();
 
     this.$axios.get("/doctor/check").then((e) => {
-      this.list = e;
+      let data = e.filter((e1) => e1.departmentid != 2);
+      this.list = data;
       this.listclass = this.list;
     });
   },
   methods: {
     findeclass(departmentid) {
-      if(departmentid!==0)
-      this.listclass = this.list.filter((e) => {
-        return e.departmentid == departmentid;
-      });
-      else
-      this.listclass= this.list
+      if (departmentid !== 0)
+        this.listclass = this.list.filter((e) => {
+          return e.departmentid == departmentid;
+        });
+      else this.listclass = this.list;
       // console.log(e);
+    },
+    changeDaily(index){
+      this.date = index;
+      this.showDaily= false
     },
     // TODO 编写预约
     subscribe(doctorid) {
@@ -94,15 +123,15 @@ export default {
           }
         })
         .then((data) => {
-          let json = { 
+          let json = {
             doctorid,
-            ...data
+            ...data,
           };
-          
+
           this.$axios.post("/user/subscribe", json).then((data) => {
-            if(data==2) {
+            if (data == 2) {
               // console.log("sdfa");
-              alert("已经预约")
+              alert("已经预约");
             }
             console.log(data);
           });
@@ -118,7 +147,7 @@ export default {
 }
 .item {
   /* height: 70px; */
-  background: rgba(150, 6, 6, 0.397);
+  background: #68a891;
   padding: 9px;
   margin-top: 3px;
   border-radius: 9px;
@@ -133,7 +162,7 @@ export default {
 .classify {
   margin: 7px 3px 0px 5px;
   height: 46px;
-  background: rgba(114, 42, 173, 0.253);
+  background: #2a8363;
   border-radius: 9px;
 }
 .items {
@@ -148,7 +177,7 @@ export default {
   border-radius: 9px;
   /* background: yellow; */
 }
-.subscribe{
+.subscribe {
   position: fixed;
   width: 70%;
   height: 40%;

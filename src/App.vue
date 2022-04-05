@@ -17,7 +17,7 @@ import conte from './layouts/W-Conte'
 
 <style scoped>
 #app{
-  background: pink;
+  background: #4b9b7d;
   height: 100%;
   /* position: absolute;
   top: 0;

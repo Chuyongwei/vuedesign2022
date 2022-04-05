@@ -67,10 +67,10 @@ export default {
       .then((e) => {
         if (e.length) {
           this.form = e[0];
-          this.imageData = {id:this.form.imgId}
-          console.log("Sfdsa",this.imageData);
+          this.imageData = {id:this.$store.state.user.uid}
+          console.log("图片id",this.imageData);
         }
-        if (this.form.imgId !== "") {
+        if (this.form.imgId !== ""&&this.form.imgId!=null) {
           this.imageUrl = "/api/common/printImg/" + this.form.imgId;
         }
       });

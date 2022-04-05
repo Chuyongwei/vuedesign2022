@@ -25,6 +25,10 @@ const routes = [
         path: "doctor",
         name: "doctor",
         component: () => import("@/pages/Doctor/index.vue")
+      }, {
+        path: "doctor/detail/:id",
+        name: "detail",
+        component: () => import("@/pages/Doctor/Detail.vue")
       },
       {
         path: "medical",
@@ -78,8 +82,8 @@ router.beforeEach((to, from, next) => {
       next("/")
     } else {
       // 添加用户信息
-      console.log("user",store.state.user);
-      if(!store.state.user){
+      console.log("user", store.state.user);
+      if (!store.state.user) {
         let user = { uid: hasToken }
         axios.post("/user/checkUserBy", user).then(e => {
           console.log("守卫中获取的user", e);
@@ -87,8 +91,8 @@ router.beforeEach((to, from, next) => {
           store.commit("getuser", e)
           store.dispatch("setPatient")
         })
-      }else{
-        if(!store.state.patient){
+      } else {
+        if (!store.state.patient) {
           store.dispatch("setPatient")
         }
       }

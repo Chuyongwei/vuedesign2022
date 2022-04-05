@@ -59,7 +59,7 @@ export default {
   /* top: 0px; */
   height: 6%;
   /* padding: 5px; */
-  background: rgba(155, 126, 235, 0.219);
+  background: #4b9b7c;
 }
 
 #content {
