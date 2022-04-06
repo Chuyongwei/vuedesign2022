@@ -26,6 +26,7 @@ Vue.use(Vuex)
             removeToken()
             state.user=null
             state.uid = 0
+            state.patient = null
         },
         SET_PATIENT(state,data){
             state.patient = data
