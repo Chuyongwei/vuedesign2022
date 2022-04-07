@@ -16,6 +16,15 @@
       <el-form-item label="姓名">
         <el-input v-model="form.uname"></el-input>
       </el-form-item>
+      <el-form-item label="手机号">
+        <el-input v-model="form.phone"></el-input>
+      </el-form-item>
+      <el-form-item label="医保卡号">
+        <el-input v-model="form.insuranceNumber"></el-input>
+      </el-form-item>
+      <el-form-item label="身份证号">
+        <el-input v-model="form.idNumber"></el-input>
+      </el-form-item>
       <el-form-item label="地址">
         <el-input v-model="form.address"></el-input>
       </el-form-item>
@@ -49,7 +58,7 @@ export default {
   data() {
     return {
       imageUrl: "",
-      imageData:{},
+      imageData: {},
       form: {
         uname: "",
         sex: "",
@@ -67,10 +76,10 @@ export default {
       .then((e) => {
         if (e.length) {
           this.form = e[0];
-          this.imageData = {id:this.$store.state.user.uid}
-          console.log("图片id",this.imageData);
+          this.imageData = { id: this.$store.state.user.uid };
+          console.log("图片id", this.imageData);
         }
-        if (this.form.imgId !== ""&&this.form.imgId!=null) {
+        if (this.form.imgId !== "" && this.form.imgId != null) {
           this.imageUrl = "/api/common/printImg/" + this.form.imgId;
         }
       });
@@ -94,7 +103,6 @@ export default {
       this.imageUrl = URL.createObjectURL(file.raw);
     },
     beforeAvatarUpload(file) {
-      
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -118,7 +126,7 @@ export default {
       return time;
     },
     handleChange(file, fileList) {
-      console.log(file,fileList);
+      console.log(file, fileList);
       // this.fileList = fileList.slice(-3);
     },
   },

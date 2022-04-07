@@ -89,7 +89,7 @@ export default {
           alert("登录失败");
         }else{
           this.$store.commit("loginin", data);
-          this.$router.push({ path: "home" || "/" }); // 跳转
+          this.$router.push({ path: "/home" || "/" }); // 跳转
         }
       });
     },

@@ -4,9 +4,9 @@
       :data="scores"
       height="250"
       border
-      style="width: 100%; background: red"
+      style="width: 100%;"
     >
-      <el-table-column prop="trackdate" label="预约日期"> </el-table-column>
+      <el-table-column prop="trackdate" label="跟踪日期"> </el-table-column>
       <el-table-column prop="name" label="医生"> </el-table-column>
       <el-table-column prop="status" label="状态" align="center">
         <template #default="scope">
@@ -68,7 +68,6 @@ export default {
 <style lang="scss" scoped>
 #content {
   height: 100%;
-  background: blue;
 }
 .score {
   height: 30px;

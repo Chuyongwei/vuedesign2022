@@ -110,20 +110,15 @@ export default {
   },
   methods: {
     findeclass(departmentid) {
-      /*       if (departmentid !== 0)
-        this.listclass = this.list.filter((e) => {
-          return e.departmentid == departmentid;
-        });
-      else this.listclass = this.list; */
       if (departmentid !== 0) {
         this.query.departmentid = departmentid;
       } else {
         this.query.departmentid = null;
       }
-      console.log(departmentid, this.query);
+      console.log("筛选编号和内容",departmentid, this.query);
       this.$axios.post("user/checkDoctorByWeek", this.query).then((e) => {
-        console.log("更新获取",e);
         this.listclass = e
+        console.log("更新获取医生",this.listclass);
       });
       // console.log(e);
     },
