@@ -32,7 +32,7 @@
         <div class="name">
           <div style="width: 50px; height: 50px; background: red; float: left">
             <img
-              src="/api/common/printImg/9"
+              :src="'/api/common/LocalImg/'+(l.avatar?l.avatar:'1517502997121740800')"
               alt=""
               style="width: 100%; height: 100%"
             />
@@ -102,7 +102,7 @@ export default {
     });
     this.date = new Date().getDay();
 
-    this.$axios.get("/doctor/check").then((e) => {
+    this.$axios.post("/user/checkDoctorByWeek",this.query).then((e) => {
       let data = e.filter((e1) => e1.departmentid != 2);
       this.list = data;
       this.listclass = this.list;
@@ -157,6 +157,7 @@ export default {
               // console.log("sdfa");
               alert("已经预约");
             }
+            alert("预约成功")
             console.log(data);
           });
         });

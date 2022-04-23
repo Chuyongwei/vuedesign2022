@@ -9,7 +9,9 @@
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
         :before-upload="beforeAvatarUpload"
+        :auto-upload="false"
       >
+      <!-- TODO 取消默认上传-->
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
@@ -66,6 +68,7 @@ export default {
         address: "",
         health: "",
         uid: this.$store.state.uid,
+        image:null
       },
     };
   },
@@ -86,7 +89,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      console.log(this.form);
+      console.log("获取数据",this.form);
       this.form.brithday = this.dateFormat(this.form.brithday);
       this.$axios.post("/user/addpatient", this.form).then((e) => {
         console.log(e);
@@ -126,7 +129,9 @@ export default {
       return time;
     },
     handleChange(file, fileList) {
-      console.log(file, fileList);
+      console.log("改变了",file, fileList);
+      this.imageUrl = URL.createObjectURL(file.raw);
+      this.form.image = file.raw[0]
       // this.fileList = fileList.slice(-3);
     },
   },
