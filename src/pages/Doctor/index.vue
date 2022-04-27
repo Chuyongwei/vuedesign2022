@@ -156,10 +156,14 @@ export default {
           this.$axios.post("/user/subscribe", json).then((data) => {
             if (data == 2) {
               alert("已经预约");
+            }if(data==1){
+              alert("预约成功")
             }
-            alert("预约成功")
             console.log(data);
           });
+        },(error)=>{
+          console.log(error);
+          alert("系统故障")
         });
     },
   },
