@@ -147,6 +147,7 @@ export default {
           }
         })
         .then((data) => {
+          if(!data) return
           let json = {
             doctorid,
             ...data,
@@ -154,7 +155,6 @@ export default {
 
           this.$axios.post("/user/subscribe", json).then((data) => {
             if (data == 2) {
-              // console.log("sdfa");
               alert("已经预约");
             }
             alert("预约成功")

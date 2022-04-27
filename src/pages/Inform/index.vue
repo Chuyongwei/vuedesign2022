@@ -4,6 +4,7 @@
       <el-upload
         class="avatar-uploader"
         action="/api/common/upload/"
+        ref="uploadImg"
         :on-change="handleChange"
         :data="imageData"
         :show-file-list="false"
@@ -79,7 +80,7 @@ export default {
       .then((e) => {
         if (e.length) {
           this.form = e[0];
-          this.imageData = { id: this.$store.state.user.uid };
+          this.imageData = { id: this.$store.state.patient.patientid };
           console.log("图片id", this.imageData);
         }
         if (this.form.imgId !== "" && this.form.imgId != null) {
@@ -91,15 +92,19 @@ export default {
     onSubmit() {
       console.log("获取数据",this.form);
       this.form.brithday = this.dateFormat(this.form.brithday);
+      let refs = this.$refs
       this.$axios.post("/user/addpatient", this.form).then((e) => {
-        console.log(e);
+        console.log("更新病人获取的信息"+e);
         if (e) {
           alert("创建成功");
+          this.imageData.patientid = e.patientid;
+          console.log(refs);
+          refs.uploadImg.submit();
         } else {
           alert("失败");
         }
         this.$store.dispatch("setPatient");
-      });
+      })
     },
     handleAvatarSuccess(res, file) {
       console.log("handleAvatarSuccess");
@@ -129,9 +134,9 @@ export default {
       return time;
     },
     handleChange(file, fileList) {
-      console.log("改变了",file, fileList);
+      console.log("改变了",file, fileList,this.imageData);
       this.imageUrl = URL.createObjectURL(file.raw);
-      this.form.image = file.raw[0]
+      // this.form.image = file.raw[0]
       // this.fileList = fileList.slice(-3);
     },
   },
