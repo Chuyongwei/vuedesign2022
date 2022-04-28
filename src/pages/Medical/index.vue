@@ -24,6 +24,20 @@
       <el-table-column label="病历 ID" prop="medicalid"> </el-table-column>
       <el-table-column label="科室" prop="departmentname"> </el-table-column>
       <el-table-column label="日期" prop="date"> </el-table-column>
+      <el-table-column label="状态" prop="status">
+        <template #default="scope">
+          <el-tag
+            :type="
+              scope.row.state === '排队'
+                ? 'warning'
+                : scope.row.state === '住院'
+                ? 'danger'
+                : 'success'
+            "
+            >{{ scope.row.state }}</el-tag
+          >
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -45,8 +59,7 @@ export default {
   },
   data() {
     return {
-      tableData: [
-      ],
+      tableData: [],
       patient: {},
     };
   },

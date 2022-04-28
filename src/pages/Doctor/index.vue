@@ -101,7 +101,8 @@ export default {
       this.classtify.push(...data);
     });
     this.date = new Date().getDay();
-
+    this.query.week = this.titles[this.date].value
+    console.log("首次获取内容",this.query,this.date);
     this.$axios.post("/user/checkDoctorByWeek",this.query).then((e) => {
       let data = e.filter((e1) => e1.departmentid != 2);
       this.list = data;
@@ -126,6 +127,7 @@ export default {
       this.date = index;
       this.showDaily = false;
       this.query.week = this.titles[index].value;
+      console.log("修改星期的内容",this.query,index);
       this.$axios.post("user/checkDoctorByWeek", this.query).then((e) => {
         this.listclass = e
       });
@@ -134,6 +136,19 @@ export default {
     subscribe(doctorid) {
       console.log(doctorid);
       // let inform = null;
+      // setDate()
+      let nowDate = new Date()
+      // let changeDay = 0
+      // if(nowDate.getDay()>this.date){
+      //   changeDay = 7-nowDate.getDay()+this.date
+      // }else{
+      //   changeDay = this.date-nowDate.getDay()
+      // }
+      // 7-nowDate.getDay()+this.date
+      let changeDay = ((this.date-nowDate.getDay())+7)%7
+      console.log("预约的时间",this.date,"===>",changeDay,"成了",nowDate.getDate())
+      nowDate.setDate(nowDate.getDate()+changeDay)
+      console.log("转变时间",nowDate.getDate());
       this.$axios
         .post("/user/findpatientbyname", this.$store.state.user)
         .then((data) => {
@@ -150,6 +165,7 @@ export default {
           if(!data) return
           let json = {
             doctorid,
+            date: nowDate,
             ...data,
           };
 
